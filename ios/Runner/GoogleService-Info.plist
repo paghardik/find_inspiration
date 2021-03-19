@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>882369823735-3271btrj4rp031agd1snnoa20a8r9m28.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.882369823735-3271btrj4rp031agd1snnoa20a8r9m28</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>882369823735-cgc82kg20g7hj7p0dptrepo4670h8g37.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBg67XihkJqpmWeAu8ZL7L2m3Fbkeya4Ig</string>
+	<key>GCM_SENDER_ID</key>
+	<string>882369823735</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.findinspiration</string>
+	<key>PROJECT_ID</key>
+	<string>find-inspiration</string>
+	<key>STORAGE_BUCKET</key>
+	<string>find-inspiration.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:882369823735:ios:51719c53ab48fe812ae4f2</string>
+	<key>DATABASE_URL</key>
+	<string>https://find-inspiration-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
