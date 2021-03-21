@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:find_inspiration/comman/constent.dart';
+import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -75,7 +76,7 @@ class CreateStoryController extends GetxController{
       _isPriceValid.value = true;
     } else {
       _isPriceValid.value = false;
-      _priceError.value = "Invalid Price";
+      _priceError.value = TranslationConstants.PRICE_ERROR;
     }
   }
 
@@ -85,7 +86,7 @@ class CreateStoryController extends GetxController{
       _isTitleValid.value = true;
     } else {
       _isTitleValid.value = false;
-      _titleError.value = "Enter at least 2 characters";
+      _titleError.value =TranslationConstants.TITLE_ERROR;
     }
   }
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/presentation/themes/app_colors.dart';
 import 'package:find_inspiration/presentation/ui/create_story/controller/create_story_controller.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class CreateStory extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   children: [
                     Text(
-                      "Create Story",
+                      TranslationConstants.CREATE_STORY,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                     )

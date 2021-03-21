@@ -1,3 +1,4 @@
+import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/presentation/ui/create_story/controller/create_story_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class AddInfoWidget extends StatelessWidget {
             TextFieldWidget(
               editingController:
               controller.textEditingControllerPrice,
-              label: "Price",
+              label: TranslationConstants.PRICE,
               errorMsg: controller.priceError.value,
             ),
             SizedBox(
@@ -29,7 +30,7 @@ class AddInfoWidget extends StatelessWidget {
             TextFieldWidget(
               editingController:
               controller.textEditingControllerTitle,
-              label: "Title",
+              label: TranslationConstants.TITLE,
               errorMsg: controller.titleError.value,
             ),
           ],

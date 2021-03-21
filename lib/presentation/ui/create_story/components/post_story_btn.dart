@@ -1,3 +1,4 @@
+import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/presentation/ui/create_story/controller/create_story_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class PostStoryWidget extends StatelessWidget {
                     controller.isImageValid.value)
                 ? _buttonClick
                 : null,
-            child: Text('Post in Story'),
+            child: Text(TranslationConstants.POST_IN_STORY),
           ),
         ),
       ),
