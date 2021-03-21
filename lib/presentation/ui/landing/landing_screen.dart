@@ -1,4 +1,4 @@
-import 'package:find_inspiration/presentation/ui/landing/landing_controller.dart';
+import 'package:find_inspiration/presentation/ui/landing/controller/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
