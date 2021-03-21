@@ -2,11 +2,16 @@ import 'dart:io';
 
 import 'package:find_inspiration/comman/constent.dart';
 import 'package:find_inspiration/comman/translation_constants.dart';
+import 'package:find_inspiration/data/datasources/story_local_data_source.dart';
+import 'package:find_inspiration/data/datasources/story_remote_data_source.dart';
+import 'package:find_inspiration/data/repository/story_repository_impli.dart';
+import 'package:find_inspiration/domain/repository/story_repository.dart';
+import 'package:find_inspiration/domain/usecase/upload_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CreateStoryController extends GetxController{
+class CreateStoryController extends GetxController {
 
   final textEditingControllerPrice = TextEditingController();
   final textEditingControllerTitle = TextEditingController();
@@ -15,7 +20,9 @@ class CreateStoryController extends GetxController{
 
   var _priceError = Rx<String>(null);
   var _titleError = Rx<String>(null);
+
   Rx<String> get priceError => _priceError;
+
   Rx<String> get titleError => _titleError;
 
   var _isPriceValid = RxBool(false);
@@ -23,8 +30,15 @@ class CreateStoryController extends GetxController{
   var _isImageValid = RxBool(false);
 
   RxBool get isPriceValid => _isPriceValid;
+
   RxBool get isTitleValid => _isTitleValid;
+
   RxBool get isImageValid => _isImageValid;
+
+  UploadImage _uploadImage;
+  StoryRepository _storyRepository;
+  StoryLocalDataSource _storyLocalDataSource;
+  StoryRemoteDataSource _storyRemoteDataSource;
 
 
   var isAllFieldValid = true;
@@ -34,6 +48,12 @@ class CreateStoryController extends GetxController{
     super.onInit();
     textEditingControllerPrice.addListener(_listenerPriceValue);
     textEditingControllerTitle.addListener(_listenerTitleValue);
+
+    _storyLocalDataSource = StoryLocalDataSourceImpl();
+    _storyRemoteDataSource = StoryRemoteDataSourceImpl();
+    _storyRepository =
+        StoryRepositoryImpl(_storyLocalDataSource, _storyRemoteDataSource);
+    _uploadImage = UploadImage(_storyRepository);
   }
 
   final _picker = ImagePicker();
@@ -66,7 +86,12 @@ class CreateStoryController extends GetxController{
     }
   }
 
-   uploadData() async{
+  uploadData() async {
+    if(imageFile.value.path.isNotEmpty){
+      var massege = await  _uploadImage.call(imageFile.value);
+      print("########");
+      print(massege);
+    }
 
   }
 
@@ -81,12 +106,15 @@ class CreateStoryController extends GetxController{
   }
 
   _listenerTitleValue() {
-    if (Constant.titleRegExp.hasMatch(textEditingControllerTitle.text) && textEditingControllerTitle.text.trim().isNotEmpty) {
+    if (Constant.titleRegExp.hasMatch(textEditingControllerTitle.text) &&
+        textEditingControllerTitle.text
+            .trim()
+            .isNotEmpty) {
       _titleError.value = null;
       _isTitleValid.value = true;
     } else {
       _isTitleValid.value = false;
-      _titleError.value =TranslationConstants.TITLE_ERROR;
+      _titleError.value = TranslationConstants.TITLE_ERROR;
     }
   }
 
