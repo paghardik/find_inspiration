@@ -1,3 +1,5 @@
+import 'package:find_inspiration/presentation/ui/create_story/create_story.dart';
+import 'package:find_inspiration/presentation/ui/story/story_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,9 +19,7 @@ class MainScreenIndexedStack extends StatelessWidget {
             Container(
               color: Colors.orange,
             ),
-            Container(
-              color: Colors.brown,
-            )
+            CreateStory()
           ],
         ),
       ),
