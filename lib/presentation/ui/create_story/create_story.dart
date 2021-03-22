@@ -49,19 +49,7 @@ class CreateStory extends StatelessWidget {
                           vertical: 30, horizontal: 20),
                       child: GestureDetector(
                         onTap: () {
-                          Get.snackbar(
-                            "Failed",
-                            "",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.teal,
-                            barBlur: 0.5,
-                            borderRadius: 0.0,
-                            duration: Duration(milliseconds: 2000),
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
-                            overlayBlur: 0.5,
-                          );
-                          //_showPicker(context);
+                          _showPicker(context);
                         },
                         child: GetX<CreateStoryController>(
                           builder: (controller) => controller

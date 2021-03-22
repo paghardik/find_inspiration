@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:find_inspiration/data/datasources/story_local_data_source.dart';
 import 'package:find_inspiration/data/datasources/story_remote_data_source.dart';
+import 'package:find_inspiration/data/models/story_model.dart';
 import 'package:find_inspiration/domain/entities/add_story.dart';
 import 'package:find_inspiration/domain/entities/app_error.dart';
 import 'package:find_inspiration/domain/entities/story_entity.dart';
@@ -22,7 +23,11 @@ class StoryRepositoryImpl extends StoryRepository {
 
   @override
   Stream<List<StoryEntity>> storyListStream() {
-    return localDataSource.storyListStream();
+    return storyRemoteDataSource.getStory().map((snapshot) {
+      return snapshot.docs.map(
+          (doc) => StoryEntity.fromStoryModel(StoryModel.fromSnapshot(doc))).toList();
+    }).asBroadcastStream();
+
   }
 
   @override
@@ -40,10 +45,10 @@ class StoryRepositoryImpl extends StoryRepository {
 
   @override
   Future<Either<AppError, bool>> addStory(AddStory addStory) async {
-    try{
+    try {
       final response = await storyRemoteDataSource.addStory(addStory);
       return Right(true);
-    } on FirebaseException catch(e){
+    } on FirebaseException catch (e) {
       return Left(AppError(AppErrorType.network));
     }
     /*return await storyRemoteDataSource.addStory(addStory).then((value) {
@@ -51,6 +56,5 @@ class StoryRepositoryImpl extends StoryRepository {
     }).catchError((error) {
 
     });*/
-
   }
 }

@@ -9,6 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 abstract class StoryRemoteDataSource {
   Future<TaskSnapshot> uploadImage(File file);
   Future<DocumentReference> addStory(AddStory addStory);
+  Stream<QuerySnapshot> getStory();
 }
 
 class StoryRemoteDataSourceImpl extends StoryRemoteDataSource {
@@ -16,13 +17,6 @@ class StoryRemoteDataSourceImpl extends StoryRemoteDataSource {
   final _firebaseStore = FirebaseFirestore.instance;
   CollectionReference get  _stories => _firebaseStore.collection("stories");
 
-/*
-  @override
-  Future<List<StoryModel>> storyList() async{
-    Future.delayed(Duration(seconds: 2));
-    return StoryDummyData().call();
-  }
-*/
 
   @override
   Future<TaskSnapshot> uploadImage(File file) async {
@@ -35,5 +29,10 @@ class StoryRemoteDataSourceImpl extends StoryRemoteDataSource {
   @override
   Future<DocumentReference> addStory(AddStory addStory) async {
     return _stories.add(addStory.toJson());
+  }
+
+  @override
+  Stream<QuerySnapshot> getStory() {
+    return _stories.snapshots();
   }
 }

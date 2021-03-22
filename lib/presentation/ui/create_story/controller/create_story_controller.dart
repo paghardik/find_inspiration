@@ -160,21 +160,36 @@ class CreateStoryController extends GetxController {
     print("Upload image url ${imageUrl}");
     var story = AddStory(
         title: textEditingControllerTitle.text,
-        price: textEditingControllerPrice.text,
+        price: textEditingControllerPrice.text  +  " CHF",
         imageUrl: imageUrl);
     var resultEither = await _addStores.call(story);
 
     resultEither.fold((l) {
       uploadStatus.value = UploadStatus.FINISHED;
-      Get.snackbar("Failed", "");
+      _showMessage();
       _wipeData();
     }, (r) {
       uploadStatus.value = UploadStatus.FINISHED;
-      Get.snackbar("Success", "");
+      _showMessage();
       _wipeData();
     });
 
 
+  }
+
+  _showMessage(){
+    Get.snackbar(
+      "Success",
+      "",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.teal,
+      barBlur: 0.5,
+      borderRadius: 0.0,
+      duration: Duration(milliseconds: 2000),
+      margin: EdgeInsets.symmetric(
+          horizontal: 20, vertical: 20),
+      overlayBlur: 0.5,
+    );
   }
 
   _wipeData() {

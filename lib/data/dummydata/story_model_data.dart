@@ -4,18 +4,19 @@ class StoryDummyData {
   @override
   Future<List<StoryModel>> call() async {
     return [
-      StoryModel("Shibuya Sushi", "18 CHF", "assets/pngs/img1.jpg"),
-      StoryModel("Super Salad", "12 CHF", "assets/pngs/img2.jpg"),
-      StoryModel("Angelo", "17 CHF", "assets/pngs/img3.jpg"),
-      StoryModel("Shibuya Sushi", "18 CHF", "assets/pngs/img1.jpg"),
-      StoryModel("Super Salad", "12 CHF", "assets/pngs/img2.jpg"),
-      StoryModel("Angelo", "17 CHF", "assets/pngs/img3.jpg"),
-      StoryModel("Shibuya Sushi", "18 CHF", "assets/pngs/img1.jpg"),
-      StoryModel("Super Salad", "12 CHF", "assets/pngs/img2.jpg"),
-      StoryModel("Angelo", "17 CHF", "assets/pngs/img3.jpg"),
-      StoryModel("Shibuya Sushi", "18 CHF", "assets/pngs/img1.jpg"),
-      StoryModel("Super Salad", "12 CHF", "assets/pngs/img2.jpg"),
-      StoryModel("Angelo", "17 CHF", "assets/pngs/img3.jpg"),
+      StoryModel(title: "Shibuya Sushi", price:"18 CHF",  imageUrl: "assets/pngs/img1.jpg"),
+      StoryModel(title:"Shibuya Sushi", price:"18 CHF", imageUrl:"assets/pngs/img1.jpg"),
+      StoryModel(title:"Super Salad", price:"12 CHF", imageUrl:"assets/pngs/img2.jpg"),
+      StoryModel(title:"Angelo", price:"17 CHF", imageUrl:"assets/pngs/img3.jpg"),
+      StoryModel(title:"Shibuya Sushi", price:"18 CHF", imageUrl:"assets/pngs/img1.jpg"),
+      StoryModel(title:"Super Salad", price:"12 CHF", imageUrl:"assets/pngs/img2.jpg"),
+      StoryModel(title:"Angelo", price:"17 CHF", imageUrl:"assets/pngs/img3.jpg"),
+      StoryModel(title:"Shibuya Sushi", price:"18 CHF", imageUrl:"assets/pngs/img1.jpg"),
+      StoryModel(title:"Super Salad", price:"12 CHF", imageUrl:"assets/pngs/img2.jpg"),
+      StoryModel(title:"Angelo", price:"17 CHF", imageUrl:"assets/pngs/img3.jpg"),
+      StoryModel(title:"Shibuya Sushi", price:"18 CHF", imageUrl:"assets/pngs/img1.jpg"),
+      StoryModel(title:"Super Salad", price:"12 CHF", imageUrl:"assets/pngs/img2.jpg"),
+      StoryModel(title:"Angelo", price:"17 CHF", imageUrl:"assets/pngs/img3.jpg"),
     ];
   }
 }

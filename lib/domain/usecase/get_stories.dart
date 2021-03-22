@@ -6,8 +6,8 @@ class GetStories {
 
   GetStories(this._storyRepository);
 
-  Stream<List<StoryEntity>> call() async* {
-    yield* _storyRepository.storyListStream();
+  Stream<List<StoryEntity>> call()  {
+     return _storyRepository.storyListStream();
   }
 
 }
