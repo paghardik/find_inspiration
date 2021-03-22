@@ -5,14 +5,18 @@ import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/data/datasources/story_local_data_source.dart';
 import 'package:find_inspiration/data/datasources/story_remote_data_source.dart';
 import 'package:find_inspiration/data/repository/story_repository_impli.dart';
+import 'package:find_inspiration/domain/entities/add_story.dart';
+import 'package:find_inspiration/domain/entities/app_error.dart';
 import 'package:find_inspiration/domain/repository/story_repository.dart';
+import 'package:find_inspiration/domain/usecase/add_story.dart';
 import 'package:find_inspiration/domain/usecase/upload_image.dart';
+import 'package:find_inspiration/presentation/ui/create_story/components/upload_state.dart';
+import 'package:find_inspiration/presentation/ui/main/components/bottom_app_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateStoryController extends GetxController {
-
   final textEditingControllerPrice = TextEditingController();
   final textEditingControllerTitle = TextEditingController();
 
@@ -35,11 +39,15 @@ class CreateStoryController extends GetxController {
 
   RxBool get isImageValid => _isImageValid;
 
+  /*Use case*/
   UploadImage _uploadImage;
+  AddStores _addStores;
+
   StoryRepository _storyRepository;
   StoryLocalDataSource _storyLocalDataSource;
   StoryRemoteDataSource _storyRemoteDataSource;
 
+  var uploadStatus = UploadStatus.NORMAL.obs;
 
   var isAllFieldValid = true;
 
@@ -54,10 +62,10 @@ class CreateStoryController extends GetxController {
     _storyRepository =
         StoryRepositoryImpl(_storyLocalDataSource, _storyRemoteDataSource);
     _uploadImage = UploadImage(_storyRepository);
+    _addStores = AddStores(_storyRepository);
   }
 
   final _picker = ImagePicker();
-
 
   Future getImageFromCamera() async {
     final pickedFileCamera = await _picker.getImage(source: ImageSource.camera);
@@ -87,12 +95,15 @@ class CreateStoryController extends GetxController {
   }
 
   uploadData() async {
-    if(imageFile.value.path.isNotEmpty){
-      var massege = await  _uploadImage.call(imageFile.value);
-      print("########");
-      print(massege);
+    if (imageFile.value.path.isNotEmpty) {
+      uploadStatus.value = UploadStatus.IN_PROGRESS;
+      var uploadImageEitherResult = await _uploadImage.call(imageFile.value);
+      uploadImageEitherResult.fold(
+          (l) => showErrorMessage(l), (r) {
+            print("Download url story $r");
+            _uploadInfo(r);
+      });
     }
-
   }
 
   _listenerPriceValue() {
@@ -107,9 +118,7 @@ class CreateStoryController extends GetxController {
 
   _listenerTitleValue() {
     if (Constant.titleRegExp.hasMatch(textEditingControllerTitle.text) &&
-        textEditingControllerTitle.text
-            .trim()
-            .isNotEmpty) {
+        textEditingControllerTitle.text.trim().isNotEmpty) {
       _titleError.value = null;
       _isTitleValid.value = true;
     } else {
@@ -118,7 +127,7 @@ class CreateStoryController extends GetxController {
     }
   }
 
-  validateField() async {
+  _validateField() async {
     isAllFieldValid = true;
     if (Constant.priceRegExp.hasMatch(textEditingControllerPrice.text)) {
       _priceError.value = null;
@@ -143,4 +152,39 @@ class CreateStoryController extends GetxController {
     super.dispose();
   }
 
+  showErrorMessage(AppError appError) {
+    uploadStatus.value = UploadStatus.FINISHED;
+  }
+
+  _uploadInfo(String imageUrl) async {
+    print("Upload image url ${imageUrl}");
+    var story = AddStory(
+        title: textEditingControllerTitle.text,
+        price: textEditingControllerPrice.text,
+        imageUrl: imageUrl);
+    var resultEither = await _addStores.call(story);
+
+    resultEither.fold((l) {
+      uploadStatus.value = UploadStatus.FINISHED;
+      Get.snackbar("Failed", "");
+      _wipeData();
+    }, (r) {
+      uploadStatus.value = UploadStatus.FINISHED;
+      Get.snackbar("Success", "");
+      _wipeData();
+    });
+
+
+  }
+
+  _wipeData() {
+    imageFile.value = File("");
+    _isPriceValid.value = false;
+    _isTitleValid.value = false;
+    _isImageValid.value = false;
+    textEditingControllerTitle.clear();
+    textEditingControllerPrice.clear();
+    _titleError.value = null;
+    _priceError.value = null;
+  }
 }
