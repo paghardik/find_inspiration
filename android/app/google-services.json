@@ -1,50 +1,42 @@
 {
   "project_info": {
-    "project_number": "882369823735",
-    "firebase_url": "https://find-inspiration-default-rtdb.firebaseio.com",
-    "project_id": "find-inspiration",
-    "storage_bucket": "find-inspiration.appspot.com"
+    "project_number": "696224699335",
+    "project_id": "findinspiration-8f139",
+    "storage_bucket": "findinspiration-8f139.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:882369823735:android:210367cd578fe80c2ae4f2",
+        "mobilesdk_app_id": "1:696224699335:android:26ab72ef33940509677fe2",
         "android_client_info": {
           "package_name": "com.findinspiration"
         }
       },
       "oauth_client": [
         {
-          "client_id": "882369823735-cgc82kg20g7hj7p0dptrepo4670h8g37.apps.googleusercontent.com",
+          "client_id": "696224699335-3vlddngjt61etttse6k09ukhvf0li635.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.findinspiration",
-            "certificate_hash": "eea7814a4690d79bd06a3091511a36441e531f0e"
+            "certificate_hash": "558a3cc7cb07865a2423250a883e04b378765935"
           }
         },
         {
-          "client_id": "882369823735-918t0rh7aib57cupcglf2so8ftbvaecu.apps.googleusercontent.com",
+          "client_id": "696224699335-pkcfurvjrcjj12mm23smevn7977p0mcc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCiuQSY24uZiS1cafxXAFvhTO4EEDu2EWE"
+          "current_key": "AIzaSyBzOVXxVcMa29XfcaZ_xfKuiEZRzlrj3mA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "882369823735-918t0rh7aib57cupcglf2so8ftbvaecu.apps.googleusercontent.com",
+              "client_id": "696224699335-pkcfurvjrcjj12mm23smevn7977p0mcc.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "882369823735-3271btrj4rp031agd1snnoa20a8r9m28.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.findinspiration"
-              }
             }
           ]
         }

@@ -7,7 +7,7 @@ class TextThemes {
 /*  static TextTheme _textThemes(){
     return GoogleFonts.josefinSansTextTheme();
   }*/
-  static TextTheme get _textThemes => GoogleFonts.josefinSansTextTheme();
+  static TextTheme get _textThemes => GoogleFonts.robotoTextTheme();
 
   /*
   * https://api.flutter.dev/flutter/material/TextTheme-class.html
