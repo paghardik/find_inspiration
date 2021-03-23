@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class PostStoryWidget extends StatelessWidget {
   CreateStoryController _createStoryController = Get.find<CreateStoryController>();
   PostStoryWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   _buttonClick(){

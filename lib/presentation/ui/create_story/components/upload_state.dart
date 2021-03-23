@@ -6,7 +6,7 @@ enum UploadStatus{
 }
 extension UploadStatusExtension on UploadStatus {
 
-  int get index {
+  int? get index {
     switch (this) {
       case UploadStatus.NORMAL:
         return 0;
@@ -34,7 +34,7 @@ extension UploadStatusExtension on UploadStatus {
     }
   }
 
-  String get name {
+  String? get name {
     switch(this){
       case UploadStatus.NORMAL:
         return "UploadStatus.NORMAL";

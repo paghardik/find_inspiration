@@ -7,7 +7,7 @@ import 'text_field.dart';
 
 class AddInfoWidget extends StatelessWidget {
   AddInfoWidget({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

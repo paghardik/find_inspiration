@@ -40,12 +40,12 @@ class CreateStoryController extends GetxController {
   RxBool get isImageValid => _isImageValid;
 
   /*Use case*/
-  UploadImage _uploadImage;
-  AddStores _addStores;
+  UploadImage? _uploadImage;
+  AddStores? _addStores;
 
-  StoryRepository _storyRepository;
-  StoryLocalDataSource _storyLocalDataSource;
-  StoryRemoteDataSource _storyRemoteDataSource;
+  StoryRepository? _storyRepository;
+  StoryLocalDataSource? _storyLocalDataSource;
+  StoryRemoteDataSource? _storyRemoteDataSource;
 
   var uploadStatus = UploadStatus.NORMAL.obs;
 
@@ -60,9 +60,9 @@ class CreateStoryController extends GetxController {
     _storyLocalDataSource = StoryLocalDataSourceImpl();
     _storyRemoteDataSource = StoryRemoteDataSourceImpl();
     _storyRepository =
-        StoryRepositoryImpl(_storyLocalDataSource, _storyRemoteDataSource);
-    _uploadImage = UploadImage(_storyRepository);
-    _addStores = AddStores(_storyRepository);
+        StoryRepositoryImpl(_storyLocalDataSource!, _storyRemoteDataSource!);
+    _uploadImage = UploadImage(_storyRepository!);
+    _addStores = AddStores(_storyRepository!);
   }
 
   final _picker = ImagePicker();
@@ -97,7 +97,7 @@ class CreateStoryController extends GetxController {
   uploadData() async {
     if (imageFile.value.path.isNotEmpty) {
       uploadStatus.value = UploadStatus.IN_PROGRESS;
-      var uploadImageEitherResult = await _uploadImage.call(imageFile.value);
+      var uploadImageEitherResult = await _uploadImage!.call(imageFile.value);
       uploadImageEitherResult.fold(
           (l) => showErrorMessage(l), (r) {
             print("Download url story $r");
@@ -162,7 +162,7 @@ class CreateStoryController extends GetxController {
         title: textEditingControllerTitle.text,
         price: textEditingControllerPrice.text  +  " CHF",
         imageUrl: imageUrl);
-    var resultEither = await _addStores.call(story);
+    var resultEither = await _addStores!.call(story);
 
     resultEither.fold((l) {
       uploadStatus.value = UploadStatus.FINISHED;

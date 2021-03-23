@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  final TextEditingController editingController;
-  final String label;
-  final String errorMsg;
+  final TextEditingController? editingController;
+  final String? label;
+  final String? errorMsg;
   const TextFieldWidget({
-    Key key, this.editingController, this.label, this.errorMsg,
+    Key? key, this.editingController, this.label, this.errorMsg,
   }) : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class TextFieldWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            label,
+            label!,
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,
