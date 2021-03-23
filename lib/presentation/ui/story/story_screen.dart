@@ -2,13 +2,14 @@ import 'dart:ui';
 
 import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/domain/entities/story_entity.dart';
-import 'package:find_inspiration/presentation/ui/create_story/controller/create_story_controller.dart';
-import 'package:find_inspiration/presentation/ui/story/controller/story_controller.dart';
+import 'package:find_inspiration/presentation/ui/controller/story_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'components/story_tile_widget.dart';
+
 class StoryScreen extends StatelessWidget {
-  StoryController _storyController = Get.put(StoryController());
+  final StoryController _storyController = Get.find<StoryController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class StoryScreen extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               children: [
                 Text(
-                  TranslationConstants.CREATE_STORY,
+                  TranslationConstants.FIND_INSPIRATION,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 )
               ],
@@ -36,49 +37,33 @@ class StoryScreen extends StatelessWidget {
           StreamBuilder<List<StoryEntity>>(
             stream: _storyController.storyList.stream,
             builder: (context, snapshot) {
-              return   Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height - 180,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: GridView.builder(
-                    itemCount: snapshot.data.length,
-                    padding: EdgeInsets.all(5),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      mainAxisExtent: 260,
-                    ), itemBuilder: (context, index) {
-                    return Container(
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(snapshot.data[index].imageUrl),
-                              ),
-                            ),
-                          ),
-                          PriceWidget(price: snapshot.data[index].price,),
-                          FoodNameWidget(title: snapshot.data[index].title)
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
-                    );
-                  },),
-                ),
-              );
+              if(snapshot.hasData){
+                return   Container(
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height - 180,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GridView.builder(
+                      itemCount: snapshot?.data?.length,
+                      padding: EdgeInsets.all(5),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        mainAxisExtent: 260,
+                      ), itemBuilder: (context, index) {
+                      return StoryTileWidget(index, snapshot.data![index]);
+                    },),
+                  ),
+                );
+              }else{
+                return Container(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }
+
             },
           ),
 
@@ -88,77 +73,7 @@ class StoryScreen extends StatelessWidget {
   }
 }
 
-class FoodNameWidget extends StatelessWidget {
-  final String title;
-  const FoodNameWidget({
-    Key key, this.title,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 50,
-        child: Stack(
-          children: [
-          Align(
-          alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(title, textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,),
-            ),
-          ),
-          )
-          ],
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [Colors.black26, Colors.transparent]
-            )
-        ),
-      ),
-    );
-  }
-}
 
-class PriceWidget extends StatelessWidget {
-  final String price;
-  const PriceWidget({
-    Key key, this.price,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-                sigmaX: 5.0, sigmaY: 5.0),
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  price.replaceFirst(" ", "\n"), textAlign: TextAlign.end,
-                  style: TextStyle(color: Colors.white,
-                      fontWeight: FontWeight.w700),),
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+
