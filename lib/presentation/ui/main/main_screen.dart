@@ -1,3 +1,4 @@
+import 'package:find_inspiration/presentation/ui/controller/story_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'indexed_stack.dart';
 class MainScreen extends StatelessWidget {
   static const ROUTE_NAME = "/main_screen";
   final MainController _mainController = Get.put(MainController());
+  final StoryController _storyController = Get.put(StoryController());
   @override
   Widget build(BuildContext context) {
     double iWidth = (MediaQuery.of(context).size.width - 20.0) / 5.0;

@@ -8,7 +8,7 @@ import 'bottom_app_bar_item.dart';
 
 class MyBottomAppBar extends StatelessWidget {
   MyBottomAppBar({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

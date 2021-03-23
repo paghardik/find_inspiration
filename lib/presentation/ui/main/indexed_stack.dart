@@ -16,10 +16,10 @@ class MainScreenIndexedStack extends StatelessWidget {
           index: controller.selectedItem.value.bottomItem.index,
           children: [
             StoryScreen(),
+            CreateStory(),
             Container(
-              color: Colors.orange,
+              child: Placeholder(),
             ),
-            CreateStory()
           ],
         ),
       ),

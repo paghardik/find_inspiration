@@ -43,7 +43,7 @@ enum BottomItem{
 }
 extension BottomItemExtension on BottomItem {
 
-  int get index {
+  int? get index {
     switch (this) {
       case BottomItem.STORY:
         return 0;
@@ -56,7 +56,7 @@ extension BottomItemExtension on BottomItem {
     }
   }
 
-  String get name {
+  String? get name {
     switch(this){
       case BottomItem.STORY:
         return "BottomItem.STORY";
