@@ -1,9 +1,10 @@
 import 'package:find_inspiration/data/models/story_model.dart';
 
 class StoryEntity {
-  String title;
-  String price;
-  String imageUrl;
+  String? title;
+  String? price;
+  String? imageUrl;
+
 
   StoryEntity({this.title, this.price, this.imageUrl});
 

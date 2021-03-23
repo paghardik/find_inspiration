@@ -1,7 +1,7 @@
 class AddStory {
-  String title;
-  String price;
-  String imageUrl;
+  String? title;
+  String? price;
+  String? imageUrl;
 
   AddStory({this.title, this.price, this.imageUrl});
 

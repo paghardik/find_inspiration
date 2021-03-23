@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_inspiration/domain/entities/story_entity.dart';
 
 class StoryModel extends StoryEntity{
-  String title;
-  String price;
-  String imageUrl;
+  String? title;//
+  String? price;
+  String? imageUrl;
 
   StoryModel({this.title, this.price, this.imageUrl}): super(title: title, price: price, imageUrl: imageUrl);
 
@@ -24,9 +24,9 @@ class StoryModel extends StoryEntity{
 
   static StoryModel fromSnapshot(DocumentSnapshot snapshot){
     return StoryModel(
-      title: snapshot.data()["title"],
-      price: snapshot.data()["price"],
-      imageUrl: snapshot.data()["imageUrl"],
+      title: snapshot.data()?["title"],
+      price: snapshot.data()?["price"],
+      imageUrl: snapshot.data()?["imageUrl"],
     );
   }
 
