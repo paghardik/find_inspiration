@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CircularIndicatorBlur extends StatelessWidget {
   const CircularIndicatorBlur({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
