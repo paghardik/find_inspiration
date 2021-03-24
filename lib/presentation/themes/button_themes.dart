@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 class ButtonThemes {
   ButtonThemes._();
 
   static ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
-    primary: Color(0xfff47b69),
+    primary: AppColors.buttonBgColor,
     textStyle: TextStyle(
       color: Colors.white,
       fontSize: 18
