@@ -11,7 +11,6 @@ import 'package:find_inspiration/domain/repository/story_repository.dart';
 import 'package:find_inspiration/domain/usecase/add_story.dart';
 import 'package:find_inspiration/domain/usecase/upload_image.dart';
 import 'package:find_inspiration/presentation/ui/create_story/components/upload_state.dart';
-import 'package:find_inspiration/presentation/ui/main/components/bottom_app_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';

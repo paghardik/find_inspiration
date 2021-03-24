@@ -1,3 +1,4 @@
+import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/presentation/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: TranslationConstants.FIND_INSPIRATION,
       theme: Themes.themeData,
       initialRoute: AppPages.INITIAL,
       getPages : AppPages.appPages,
