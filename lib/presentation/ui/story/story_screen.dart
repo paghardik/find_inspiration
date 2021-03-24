@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:find_inspiration/comman/translation_constants.dart';
 import 'package:find_inspiration/domain/entities/story_entity.dart';
+import 'package:find_inspiration/presentation/themes/app_colors.dart';
 import 'package:find_inspiration/presentation/ui/controller/story_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class StoryScreen extends StatelessWidget {
                 .size
                 .width,
             height: 100,
-            color: Color(0xffb7db6d),
+            color: AppColors.appBarColor,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Stack(
               alignment: Alignment.bottomLeft,

@@ -10,12 +10,14 @@ import 'package:find_inspiration/domain/entities/app_error.dart';
 import 'package:find_inspiration/domain/repository/story_repository.dart';
 import 'package:find_inspiration/domain/usecase/add_story.dart';
 import 'package:find_inspiration/domain/usecase/upload_image.dart';
+import 'package:find_inspiration/presentation/themes/app_colors.dart';
 import 'package:find_inspiration/presentation/ui/create_story/components/upload_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreateStoryController extends GetxController {
+
   final textEditingControllerPrice = TextEditingController();
   final textEditingControllerTitle = TextEditingController();
 
@@ -23,19 +25,16 @@ class CreateStoryController extends GetxController {
 
   var _priceError = Rx<String>(null);
   var _titleError = Rx<String>(null);
-
   Rx<String> get priceError => _priceError;
-
   Rx<String> get titleError => _titleError;
 
+
+  /*this flag use for button enable or disable*/
   var _isPriceValid = RxBool(false);
   var _isTitleValid = RxBool(false);
   var _isImageValid = RxBool(false);
-
   RxBool get isPriceValid => _isPriceValid;
-
   RxBool get isTitleValid => _isTitleValid;
-
   RxBool get isImageValid => _isImageValid;
 
   /*Use case*/
@@ -46,9 +45,11 @@ class CreateStoryController extends GetxController {
   StoryLocalDataSource? _storyLocalDataSource;
   StoryRemoteDataSource? _storyRemoteDataSource;
 
+  /*based on Upload status we hide and show circular indicator*/
   var uploadStatus = UploadStatus.NORMAL.obs;
 
   var isAllFieldValid = true;
+  final _picker = ImagePicker();
 
   @override
   void onInit() {
@@ -64,13 +65,10 @@ class CreateStoryController extends GetxController {
     _addStores = AddStores(_storyRepository!);
   }
 
-  final _picker = ImagePicker();
-
   Future getImageFromCamera() async {
     final pickedFileCamera = await _picker.getImage(source: ImageSource.camera);
 
     if (pickedFileCamera != null) {
-      print('image selected. ${File(pickedFileCamera.path).path}');
       imageFile.value = File(pickedFileCamera.path);
       _isImageValid.value = true;
       update();
@@ -93,13 +91,13 @@ class CreateStoryController extends GetxController {
     }
   }
 
+  /*upload image on firestore*/
   uploadData() async {
     if (imageFile.value.path.isNotEmpty) {
       uploadStatus.value = UploadStatus.IN_PROGRESS;
       var uploadImageEitherResult = await _uploadImage!.call(imageFile.value);
       uploadImageEitherResult.fold(
           (l) => showErrorMessage(l), (r) {
-            print("Download url story $r");
             _uploadInfo(r);
       });
     }
@@ -155,8 +153,8 @@ class CreateStoryController extends GetxController {
     uploadStatus.value = UploadStatus.FINISHED;
   }
 
+  /*upload image url and story info on Firebase*/
   _uploadInfo(String imageUrl) async {
-    print("Upload image url ${imageUrl}");
     var story = AddStory(
         title: textEditingControllerTitle.text,
         price: textEditingControllerPrice.text  +  " CHF",
@@ -165,23 +163,23 @@ class CreateStoryController extends GetxController {
 
     resultEither.fold((l) {
       uploadStatus.value = UploadStatus.FINISHED;
-      _showMessage();
+      _showMessage(TranslationConstants.FAILED,TranslationConstants.FAILED_MSG);
       _wipeData();
     }, (r) {
       uploadStatus.value = UploadStatus.FINISHED;
-      _showMessage();
+      _showMessage(TranslationConstants.SUCCESS, TranslationConstants.SUCCESS_MSG);
       _wipeData();
     });
 
 
   }
 
-  _showMessage(){
+  _showMessage(String title, String message){
     Get.snackbar(
       "Success",
       "",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.teal,
+      backgroundColor: AppColors.appBarColor,
       barBlur: 0.5,
       borderRadius: 0.0,
       duration: Duration(milliseconds: 2000),

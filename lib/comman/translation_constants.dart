@@ -11,4 +11,11 @@ class TranslationConstants {
   static const String PRICE_ERROR = 'Invalid Price';
   static const String TITLE_ERROR = 'Invalid Title';
 
+  static const String  SUCCESS = "Success";
+  static const String  SUCCESS_MSG = "Story Added";
+
+
+  static const String  FAILED = "Failed";
+  static const String  FAILED_MSG = "Something went wrong please try again!";
+
 }
